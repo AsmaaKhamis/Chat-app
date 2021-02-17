@@ -9,25 +9,24 @@ const $messages = document.querySelector('#messages')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
-const locationMessage = document.querySelector('#message-shareLocation').innerHTML
+const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 
 socket.on('message', (message) => {
     console.log(message)
     const html = Mustache.render(messageTemplate, {
         message: message.text,
-        createdAt: moment(message.createdAt).format('LTS')
+        createdAt: moment(message.createdAt).format('h:mm a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
-
+})
 
 socket.on('locationMessage', (message) => {
     console.log(message)
-    const html2 = Mustache.render(locationMessage, {
-       url: message.url,
-       createdAt: moment(message.createdAt).format('LTS')
+    const html = Mustache.render(locationMessageTemplate, {
+        url: message.url,
+        createdAt: moment(message.createdAt).format('h:mm a')
     })
-    $messages.insertAdjacentHTML('beforeend', html2)
-})
+    $messages.insertAdjacentHTML('beforeend', html)
 })
 
 $messageForm.addEventListener('submit', (e) => {
