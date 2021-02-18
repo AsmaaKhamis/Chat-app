@@ -1,19 +1,20 @@
-const { text } = require("express");
-
-const generateMessage = (text) => {
+const generateMessage = (username ,text) => {
     return {
+        username,
         text,
         createdAt: new Date().getTime()
     }
 }
 
-const generateLocationMessages = (url) => {
+const generateLocationMessage = (username ,url) => {
     return {
+        username,
         url,
         createdAt: new Date().getTime()
     }
 }
- module.exports = {
-     generateMessage,
-     generateLocationMessages
- }
+
+module.exports = {
+    generateMessage,
+    generateLocationMessage
+}
